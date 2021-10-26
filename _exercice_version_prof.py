@@ -1,14 +1,43 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-# TODO: Importez vos modules ici
+import math
+import sys
+sys.path.insert(0, '/Users/kegaub_book/Documents/charge_cours/INF1007/20213/exercices/2021A_C01_ch6_1_exercices')
+from exercice_ch6 import frequence
+from turtle import *
+import re
 
 
+def compute_volume_and_mass(a=2, b=4, c=6, masse_vol=10):
+    volume = math.pi * a * b * c * 4 / 3
+    masse = volume * masse_vol
 
-# TODO: Définissez vos fonction ici
+    return volume, masse
+
+
+def draw_branch(branch_len, pen_size, angle):
+    if branch_len > 0 and pen_size > 0:
+        pensize(pen_size)
+        forward(branch_len)
+        right(angle)
+        draw_branch(branch_len - 10, pen_size - 1, angle - 5)
+        left(angle * 2)
+        draw_branch(branch_len - 10, pen_size - 1, angle - 5)
+        right(angle)
+        backward(branch_len)
+
+
+def draw_tree():
+    setheading(90)
+    color("green")
+    draw_branch(70, 7, 35)
+    done()
 
 
 if __name__ == '__main__':
     # TODO: Appelez vos fonctions ici
+    draw_tree()
+    print(compute_volume_and_mass())
+    print((lambda sentence: sorted(frequence(sentence), key=frequence(sentence).__getitem__)[-1])("big big test bb"))
 
-    pass
