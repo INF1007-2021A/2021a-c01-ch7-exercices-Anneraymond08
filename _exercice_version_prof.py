@@ -35,9 +35,44 @@ def draw_tree():
     done()
 
 
+def valide(saisie):
+    """
+    if len(saisie) != 0:
+        return set(saisie).issubset("atgc")
+
+    return False
+    """
+
+    return bool(re.match("^[atgc]+$", saisie))
+
+
+def saisie(type):
+    value = input(f"Entrez une {type} d'ADN valide: ")
+
+    if valide(value):
+        return value
+
+    print(f"La {type} n'est pas valide")
+    return saisie(type)
+
+
+def proportion(chain, sequence):
+
+    return chain.count(sequence) / len(chain)
+
+
+def check_dna():
+    chain = saisie("chaine")
+    sequence = saisie("sequence")
+
+    prop = proportion(chain, sequence)
+    print("Il y a {0:.2f} % de {1}.".format(prop*100, sequence))
+
+
 if __name__ == '__main__':
     # TODO: Appelez vos fonctions ici
     draw_tree()
     print(compute_volume_and_mass())
     print((lambda sentence: sorted(frequence(sentence), key=frequence(sentence).__getitem__)[-1])("big big test bb"))
+    check_dna()
 
